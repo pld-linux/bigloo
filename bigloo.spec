@@ -6,6 +6,7 @@ Release:	6
 License:	see README file
 Group:		Development/Languages
 Source0:	ftp://ftp-sop.inria.fr/mimosa/fp/Bigloo/%{name}%{version}.tar.gz
+# Source0-md5:	3ecfefec17301089667c55afc39e5205
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-install.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
