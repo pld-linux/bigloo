@@ -91,4 +91,4 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_mandir}/man1/*
 %{_datadir}/info/bigloo.info*
-#%{_datadir}/xemacs/site-lisp/bigloo/*.el*
+#%%{_datadir}/xemacs/site-lisp/bigloo/*.el*
