@@ -1,18 +1,24 @@
+Summary:	Bigloo is compiler for the Scheme programming language
+Summary(pl):	Bigloo - kompilator jêzyka programowania Scheme
 Name:		bigloo
 Version:	2.5b
 Release:	6
-Copyright:	see README file
+License:	see README file
 Group:		Development/Languages
 Source0:	ftp://ftp-sop.inria.fr/mimosa/fp/Bigloo/%{name}%{version}.tar.gz
-Patch0:		bigloo-DESTDIR.patch
-Patch1:		bigloo-install.patch
-Summary:	Bigloo is compiler for the Scheme programming language
+Patch0:		%{name}-DESTDIR.patch
+Patch1:		%{name}-install.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Bigloo is a compiler and interpreter for an extended version of the
 Scheme programming language. Bigloo allows a full connection between
 Scheme and C programs. It delivers fast and small executables.
+
+%description -l pl
+Bigloo jest kompilatorem i interpreterem rozszerzonej wersji jêzyka
+programowania Scheme. Bigloo pozwala na pe³ne ³±czenie programów w
+Scheme i w C. Daje szybkie i ma³e binarki.
 
 %prep
 %setup -q -n bigloo%{version}
@@ -21,12 +27,12 @@ Scheme and C programs. It delivers fast and small executables.
 
 %build
 ./configure \
-   --prefix=%{_prefix} \
-   --bindir=%{_bindir} \
-   --libdir=%{_libdir} \
-   --mandir=%{_mandir}/man1 \
-   --infodir=%{_infodir} \
-   --emacs=/bin/true
+	--prefix=%{_prefix} \
+	--bindir=%{_bindir} \
+	--libdir=%{_libdir} \
+	--mandir=%{_mandir}/man1 \
+	--infodir=%{_infodir} \
+	--emacs=/bin/true
 
 %{__make} boot
 
@@ -62,13 +68,16 @@ ln -sf %{_libdir}/bigloo/2.5b/libbigloofth-2.5b.so    $RPM_BUILD_ROOT%{_libdir}/
 ln -sf %{_libdir}/bigloo/2.5b/libbigloogc-2.5b.so     $RPM_BUILD_ROOT%{_libdir}/libbigloogc-2.5b.so
 ln -sf %{_libdir}/bigloo/2.5b/libbigloogc_fth-2.5b.so $RPM_BUILD_ROOT%{_libdir}/libbigloogc_fth-2.5b.so
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
 %doc README ChangeLog manual/*.html
-%dir %{_libdir}/bigloo/
+%dir %{_libdir}/bigloo
 %dir %{_libdir}/bigloo/%{version}
 %attr(755,root,root) %{_bindir}/*
 %{_libdir}/bigloo/%{version}/Makefile.config
@@ -83,6 +92,3 @@ ln -sf %{_libdir}/bigloo/2.5b/libbigloogc_fth-2.5b.so $RPM_BUILD_ROOT%{_libdir}/
 %{_mandir}/man1/*
 %{_datadir}/info/bigloo.info*
 #%{_datadir}/xemacs/site-lisp/bigloo/*.el*
-
-%clean
-rm -rf $RPM_BUILD_ROOT
