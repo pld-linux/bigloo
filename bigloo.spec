@@ -22,7 +22,7 @@ programowania Scheme. Bigloo pozwala na pe³ne ³±czenie programów w
 Scheme i w C. Daje szybkie i ma³e binarki.
 
 %prep
-%setup -q -n bigloo%{version}
+%setup -q -n %{name}%{version}
 %patch0 -p1
 %patch1 -p1
 
@@ -44,8 +44,6 @@ BIGLOOLIB=$RPM_BUILD_ROOT%{_libdir}/%{name}/%{version}
 export BIGLOOLIB
 %{__make} install compile-bee \
 	DESTDIR=$RPM_BUILD_ROOT
-unset BIGLOOLIB
-export BIGLOOLIB
 %{__make} install-bee \
 	DESTDIR=$RPM_BUILD_ROOT
 %{__make} -C fthread install \
@@ -61,16 +59,16 @@ install manuals/bpp.man $RPM_BUILD_ROOT%{_mandir}/man1/bpp.1
 install manuals/bprof.man $RPM_BUILD_ROOT%{_mandir}/man1/bprof.1
 install manuals/btags.man $RPM_BUILD_ROOT%{_mandir}/man1/btags.1
 
-ln -sf %{_libdir}/bigloo/2.5b/libbigloo-2.5b.so       $RPM_BUILD_ROOT%{_libdir}/libbigloo-2.5b.so
-ln -sf %{_libdir}/bigloo/2.5b/libbigloo_u-2.5b.so     $RPM_BUILD_ROOT%{_libdir}/libbigloo_u-2.5b.so
-ln -sf %{_libdir}/bigloo/2.5b/libbigloobdb-2.5b.so    $RPM_BUILD_ROOT%{_libdir}/libbigloobdb-2.5b.so
-ln -sf %{_libdir}/bigloo/2.5b/libbigloobdb-2.5b.so    $RPM_BUILD_ROOT%{_libdir}/libbigloobdb_u-2.5b.so
-ln -sf %{_libdir}/bigloo/2.5b/libbigloobdl-2.5b.so    $RPM_BUILD_ROOT%{_libdir}/libbigloobdl-2.5b.so
-ln -sf %{_libdir}/bigloo/2.5b/libbigloobdl-2.5b.so    $RPM_BUILD_ROOT%{_libdir}/libbigloobdl_u-2.5b.so
-ln -sf %{_libdir}/bigloo/2.5b/libbigloofth-2.5b.so    $RPM_BUILD_ROOT%{_libdir}/libbigloofth-2.5b.so
-ln -sf %{_libdir}/bigloo/2.5b/libbigloofth-2.5b.so    $RPM_BUILD_ROOT%{_libdir}/libbigloofth_u-2.5b.so
-ln -sf %{_libdir}/bigloo/2.5b/libbigloogc-2.5b.so     $RPM_BUILD_ROOT%{_libdir}/libbigloogc-2.5b.so
-ln -sf %{_libdir}/bigloo/2.5b/libbigloogc_fth-2.5b.so $RPM_BUILD_ROOT%{_libdir}/libbigloogc_fth-2.5b.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloo-%{version}.so       $RPM_BUILD_ROOT%{_libdir}/libbigloo-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloo_u-%{version}.so     $RPM_BUILD_ROOT%{_libdir}/libbigloo_u-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloobdb-%{version}.so    $RPM_BUILD_ROOT%{_libdir}/libbigloobdb-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloobdb-%{version}.so    $RPM_BUILD_ROOT%{_libdir}/libbigloobdb_u-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloobdl-%{version}.so    $RPM_BUILD_ROOT%{_libdir}/libbigloobdl-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloobdl-%{version}.so    $RPM_BUILD_ROOT%{_libdir}/libbigloobdl_u-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloofth-%{version}.so    $RPM_BUILD_ROOT%{_libdir}/libbigloofth-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloofth-%{version}.so    $RPM_BUILD_ROOT%{_libdir}/libbigloofth_u-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloogc-%{version}.so     $RPM_BUILD_ROOT%{_libdir}/libbigloogc-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloogc_fth-%{version}.so $RPM_BUILD_ROOT%{_libdir}/libbigloogc_fth-%{version}.so
 
 %clean
 rm -rf $RPM_BUILD_ROOT
