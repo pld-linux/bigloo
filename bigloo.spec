@@ -61,14 +61,14 @@ install manuals/bpp.man $RPM_BUILD_ROOT%{_mandir}/man1/bpp.1
 install manuals/bprof.man $RPM_BUILD_ROOT%{_mandir}/man1/bprof.1
 install manuals/btags.man $RPM_BUILD_ROOT%{_mandir}/man1/btags.1
 
-ln -sf %{_libdir}/bigloo/%{version}/libbigloo_s-%{version}.so     $RPM_BUILD_ROOT%{_libdir}/libbigloo_s-%{version}.so
-ln -sf %{_libdir}/bigloo/%{version}/libbigloo_u-%{version}.so     $RPM_BUILD_ROOT%{_libdir}/libbigloo_u-%{version}.so
-ln -sf %{_libdir}/bigloo/%{version}/libbigloobdl_s-%{version}.so  $RPM_BUILD_ROOT%{_libdir}/libbigloobdl_s-%{version}.so
-ln -sf %{_libdir}/bigloo/%{version}/libbigloobdl_u-%{version}.so  $RPM_BUILD_ROOT%{_libdir}/libbigloobdl_u-%{version}.so
-ln -sf %{_libdir}/bigloo/%{version}/libbigloofth_s-%{version}.so  $RPM_BUILD_ROOT%{_libdir}/libbigloofth_s-%{version}.so
-ln -sf %{_libdir}/bigloo/%{version}/libbigloofth_u-%{version}.so  $RPM_BUILD_ROOT%{_libdir}/libbigloofth_u-%{version}.so
-ln -sf %{_libdir}/bigloo/%{version}/libbigloogc-%{version}.so     $RPM_BUILD_ROOT%{_libdir}/libbigloogc-%{version}.so
-ln -sf %{_libdir}/bigloo/%{version}/libbigloogc_fth-%{version}.so $RPM_BUILD_ROOT%{_libdir}/libbigloogc_fth-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloo_s-%{version}.so		$RPM_BUILD_ROOT%{_libdir}/libbigloo_s-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloo_u-%{version}.so		$RPM_BUILD_ROOT%{_libdir}/libbigloo_u-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloobdl_s-%{version}.so	$RPM_BUILD_ROOT%{_libdir}/libbigloobdl_s-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloobdl_u-%{version}.so	$RPM_BUILD_ROOT%{_libdir}/libbigloobdl_u-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloofth_s-%{version}.so	$RPM_BUILD_ROOT%{_libdir}/libbigloofth_s-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloofth_u-%{version}.so	$RPM_BUILD_ROOT%{_libdir}/libbigloofth_u-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloogc-%{version}.so		$RPM_BUILD_ROOT%{_libdir}/libbigloogc-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloogc_fth-%{version}.so	$RPM_BUILD_ROOT%{_libdir}/libbigloogc_fth-%{version}.so
 
 %clean
 rm -rf $RPM_BUILD_ROOT
