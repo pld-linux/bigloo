@@ -1,13 +1,12 @@
 Summary:	Bigloo is compiler for the Scheme programming language
 Summary(pl):	Bigloo - kompilator jêzyka programowania Scheme
 Name:		bigloo
-Version:	2.5b
-Release:	6
+Version:	2.6a
+Release:	1
 License:	see README file
 Group:		Development/Languages
 Source0:	ftp://ftp-sop.inria.fr/mimosa/fp/Bigloo/%{name}%{version}.tar.gz
-# Source0-md5:	3ecfefec17301089667c55afc39e5205
-Patch0:		%{name}-DESTDIR.patch
+# Source0-md5:	a328d44fd1e4fa71ec5ada2a39f990fc
 Patch1:		%{name}-install.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -23,7 +22,6 @@ Scheme i w C. Daje szybkie i ma³e binarki.
 
 %prep
 %setup -q -n %{name}%{version}
-%patch0 -p1
 %patch1 -p1
 
 %build
@@ -33,7 +31,10 @@ Scheme i w C. Daje szybkie i ma³e binarki.
 	--libdir=%{_libdir} \
 	--mandir=%{_mandir}/man1 \
 	--infodir=%{_infodir} \
-	--emacs=/bin/true
+	--emacs=/bin/true \
+	--jvm=no \
+	--cflags="%{rpmcflags}" \
+	--coflags="%{rpmcflags}"
 
 %{__make} boot
 
@@ -46,8 +47,8 @@ export BIGLOOLIB
 	DESTDIR=$RPM_BUILD_ROOT
 %{__make} install-bee \
 	DESTDIR=$RPM_BUILD_ROOT
-%{__make} -C fthread install \
-	DESTDIR=$RPM_BUILD_ROOT
+#%{__make} -C fthread install \
+#	DESTDIR=$RPM_BUILD_ROOT
 
 install manuals/bigloo.man $RPM_BUILD_ROOT%{_mandir}/man1/bigloo.1
 install manuals/afile.man $RPM_BUILD_ROOT%{_mandir}/man1/afile.1
@@ -59,14 +60,12 @@ install manuals/bpp.man $RPM_BUILD_ROOT%{_mandir}/man1/bpp.1
 install manuals/bprof.man $RPM_BUILD_ROOT%{_mandir}/man1/bprof.1
 install manuals/btags.man $RPM_BUILD_ROOT%{_mandir}/man1/btags.1
 
-ln -sf %{_libdir}/bigloo/%{version}/libbigloo-%{version}.so       $RPM_BUILD_ROOT%{_libdir}/libbigloo-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloo_s-%{version}.so     $RPM_BUILD_ROOT%{_libdir}/libbigloo_s-%{version}.so
 ln -sf %{_libdir}/bigloo/%{version}/libbigloo_u-%{version}.so     $RPM_BUILD_ROOT%{_libdir}/libbigloo_u-%{version}.so
-ln -sf %{_libdir}/bigloo/%{version}/libbigloobdb-%{version}.so    $RPM_BUILD_ROOT%{_libdir}/libbigloobdb-%{version}.so
-ln -sf %{_libdir}/bigloo/%{version}/libbigloobdb-%{version}.so    $RPM_BUILD_ROOT%{_libdir}/libbigloobdb_u-%{version}.so
-ln -sf %{_libdir}/bigloo/%{version}/libbigloobdl-%{version}.so    $RPM_BUILD_ROOT%{_libdir}/libbigloobdl-%{version}.so
-ln -sf %{_libdir}/bigloo/%{version}/libbigloobdl-%{version}.so    $RPM_BUILD_ROOT%{_libdir}/libbigloobdl_u-%{version}.so
-ln -sf %{_libdir}/bigloo/%{version}/libbigloofth-%{version}.so    $RPM_BUILD_ROOT%{_libdir}/libbigloofth-%{version}.so
-ln -sf %{_libdir}/bigloo/%{version}/libbigloofth-%{version}.so    $RPM_BUILD_ROOT%{_libdir}/libbigloofth_u-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloobdl_s-%{version}.so  $RPM_BUILD_ROOT%{_libdir}/libbigloobdl_s-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloobdl_u-%{version}.so  $RPM_BUILD_ROOT%{_libdir}/libbigloobdl_u-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloofth_s-%{version}.so  $RPM_BUILD_ROOT%{_libdir}/libbigloofth_s-%{version}.so
+ln -sf %{_libdir}/bigloo/%{version}/libbigloofth_u-%{version}.so  $RPM_BUILD_ROOT%{_libdir}/libbigloofth_u-%{version}.so
 ln -sf %{_libdir}/bigloo/%{version}/libbigloogc-%{version}.so     $RPM_BUILD_ROOT%{_libdir}/libbigloogc-%{version}.so
 ln -sf %{_libdir}/bigloo/%{version}/libbigloogc_fth-%{version}.so $RPM_BUILD_ROOT%{_libdir}/libbigloogc_fth-%{version}.so
 
@@ -78,7 +77,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README ChangeLog manual/*.html
+%doc README ChangeLog manuals/*.html
 %dir %{_libdir}/bigloo
 %dir %{_libdir}/bigloo/%{version}
 %attr(755,root,root) %{_bindir}/*
@@ -86,9 +85,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/bigloo/%{version}/bigloo.h
 %{_libdir}/bigloo/%{version}/bigloo_config.h
 %{_libdir}/bigloo/%{version}/*.init
-%{_libdir}/bigloo/%{version}/*.zip
+#%{_libdir}/bigloo/%{version}/*.zip
 %{_libdir}/bigloo/%{version}/*.*heap
 %{_libdir}/bigloo/%{version}/lib*.a
+%{_libdir}/bigloo/%{version}/bmem
 %attr(755,root,root) %{_libdir}/bigloo/%{version}/lib*.so
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_mandir}/man1/*
