@@ -1,0 +1,11 @@
+--- bigloo2.5b/bmacs/Makefile~	Mon Sep  2 11:41:03 2002
++++ bigloo2.5b/bmacs/Makefile	Fri Oct 11 20:30:02 2002
+@@ -152,7 +152,7 @@
+ #*---------------------------------------------------------------------*/
+ #*    install ...                                                      */
+ #*---------------------------------------------------------------------*/
+-install: install.$(EMACSBRAND)
++install:
+ 
+ install.emacs21: doinstall
+ install.xemacs: doinstall
