@@ -42,11 +42,14 @@ rm -rf $RPM_BUILD_ROOT
 
 BIGLOOLIB=$RPM_BUILD_ROOT%{_libdir}/%{name}/%{version}
 export BIGLOOLIB
-%{__make} DESTDIR=$RPM_BUILD_ROOT install compile-bee
+%{__make} install compile-bee \
+	DESTDIR=$RPM_BUILD_ROOT
 unset BIGLOOLIB
 export BIGLOOLIB
-%{__make} DESTDIR=$RPM_BUILD_ROOT install-bee
-%{__make} -C fthread DESTDIR=$RPM_BUILD_ROOT install
+%{__make} install-bee \
+	DESTDIR=$RPM_BUILD_ROOT
+%{__make} -C fthread install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 install manuals/bigloo.man $RPM_BUILD_ROOT%{_mandir}/man1/bigloo.1
 install manuals/afile.man $RPM_BUILD_ROOT%{_mandir}/man1/afile.1
