@@ -86,6 +86,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/bigloo/%{version}/Makefile.config
 %{_libdir}/bigloo/%{version}/bigloo.h
 %{_libdir}/bigloo/%{version}/bigloo_config.h
+%{_libdir}/bigloo/%{version}/bigloo_gc.h
 %{_libdir}/bigloo/%{version}/*.init
 #%{_libdir}/bigloo/%{version}/*.zip
 %{_libdir}/bigloo/%{version}/*.*heap
