@@ -1,14 +1,14 @@
 Summary:	Bigloo is compiler for the Scheme programming language
 Summary(pl.UTF-8):	Bigloo - kompilator języka programowania Scheme
 Name:		bigloo
-Version:	2.6b
-Release:	2
-License:	see README file
+Version:	3.0b
+%define _beta	beta21Aug07
+Release:	0.%{_beta}
+License:	GPL/LGPL
 Group:		Development/Languages
-Source0:	ftp://ftp-sop.inria.fr/mimosa/fp/Bigloo/%{name}%{version}.tar.gz
-# Source0-md5:	bbb788e70fafe2191f1da87c6fdb3f01
+Source0:	ftp://ftp-sop.inria.fr/mimosa/fp/Bigloo/%{name}%{version}-%{_beta}.tar.gz
+# Source0-md5:	7bee5f27845b018bcc3aaf8795c80294
 Patch0:		%{name}-install.patch
-Patch1:		%{name}-gcc4.patch
 URL:		http://www-sop.inria.fr/mimosa/fp/Bigloo/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -25,7 +25,6 @@ Scheme i w C. Daje szybkie i małe binarki.
 %prep
 %setup -q -n %{name}%{version}
 %patch0 -p1
-%patch1 -p1
 
 %build
 ./configure \
@@ -39,29 +38,29 @@ Scheme i w C. Daje szybkie i małe binarki.
 	--cflags="%{rpmcflags}" \
 	--coflags="%{rpmcflags}"
 
-%{__make} boot
+%{__make} -j1 boot
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 BIGLOOLIB=$RPM_BUILD_ROOT%{_libdir}/%{name}/%{version}
 export BIGLOOLIB
-%{__make} install compile-bee \
+%{__make} -j1 install compile-bee \
 	DESTDIR=$RPM_BUILD_ROOT
-%{__make} install-bee \
+%{__make} -j1 install-bee \
 	DESTDIR=$RPM_BUILD_ROOT
 #%{__make} -C fthread install \
 #	DESTDIR=$RPM_BUILD_ROOT
 
 install manuals/bigloo.man $RPM_BUILD_ROOT%{_mandir}/man1/bigloo.1
-install manuals/afile.man $RPM_BUILD_ROOT%{_mandir}/man1/afile.1
-install manuals/jfile.man $RPM_BUILD_ROOT%{_mandir}/man1/jfile.1
-install manuals/bdepend.man $RPM_BUILD_ROOT%{_mandir}/man1/bdepend.1
-install manuals/bmake.man $RPM_BUILD_ROOT%{_mandir}/man1/bmake.1
-install manuals/mco.man $RPM_BUILD_ROOT%{_mandir}/man1/mco.1
-install manuals/bpp.man $RPM_BUILD_ROOT%{_mandir}/man1/bpp.1
-install manuals/bprof.man $RPM_BUILD_ROOT%{_mandir}/man1/bprof.1
-install manuals/btags.man $RPM_BUILD_ROOT%{_mandir}/man1/btags.1
+install manuals/bglafile.man $RPM_BUILD_ROOT%{_mandir}/man1/bglafile.1
+install manuals/bgljfile.man $RPM_BUILD_ROOT%{_mandir}/man1/bgljfile.1
+install manuals/bgldepend.man $RPM_BUILD_ROOT%{_mandir}/man1/bgldepend.1
+install manuals/bglmake.man $RPM_BUILD_ROOT%{_mandir}/man1/bglmake.1
+install manuals/bglmco.man $RPM_BUILD_ROOT%{_mandir}/man1/bglmco.1
+install manuals/bglpp.man $RPM_BUILD_ROOT%{_mandir}/man1/bglpp.1
+install manuals/bglprof.man $RPM_BUILD_ROOT%{_mandir}/man1/bglprof.1
+install manuals/bgltags.man $RPM_BUILD_ROOT%{_mandir}/man1/bgltags.1
 
 ln -sf %{_libdir}/bigloo/%{version}/libbigloo_s-%{version}.so		$RPM_BUILD_ROOT%{_libdir}/libbigloo_s-%{version}.so
 ln -sf %{_libdir}/bigloo/%{version}/libbigloo_u-%{version}.so		$RPM_BUILD_ROOT%{_libdir}/libbigloo_u-%{version}.so
