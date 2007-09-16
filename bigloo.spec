@@ -2,12 +2,11 @@ Summary:	Bigloo is compiler for the Scheme programming language
 Summary(pl.UTF-8):	Bigloo - kompilator języka programowania Scheme
 Name:		bigloo
 Version:	3.0b
-%define _beta	beta21Aug07
-Release:	0.%{_beta}
+Release:	1
 License:	GPL/LGPL
 Group:		Development/Languages
-Source0:	ftp://ftp-sop.inria.fr/mimosa/fp/Bigloo/%{name}%{version}-%{_beta}.tar.gz
-# Source0-md5:	7bee5f27845b018bcc3aaf8795c80294
+Source0:	ftp://ftp-sop.inria.fr/mimosa/fp/Bigloo/%{name}%{version}.tar.gz
+# Source0-md5:	426ad39c4358ca21ce3e49eebbcb12cf
 Patch0:		%{name}-install.patch
 URL:		http://www-sop.inria.fr/mimosa/fp/Bigloo/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -70,6 +69,10 @@ ln -sf %{_libdir}/bigloo/%{version}/libbigloofth_s-%{version}.so	$RPM_BUILD_ROOT
 ln -sf %{_libdir}/bigloo/%{version}/libbigloofth_u-%{version}.so	$RPM_BUILD_ROOT%{_libdir}/libbigloofth_u-%{version}.so
 ln -sf %{_libdir}/bigloo/%{version}/libbigloogc-%{version}.so		$RPM_BUILD_ROOT%{_libdir}/libbigloogc-%{version}.so
 ln -sf %{_libdir}/bigloo/%{version}/libbigloogc_fth-%{version}.so	$RPM_BUILD_ROOT%{_libdir}/libbigloogc_fth-%{version}.so
+
+rm -rf $RPM_BUILD_ROOT%{_prefix}/doc
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/%{version}/Makefile.misc
+rm -rf $RPM_BUILD_ROOT%{_infodir}/dir
 
 %clean
 rm -rf $RPM_BUILD_ROOT
