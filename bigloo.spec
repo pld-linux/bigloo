@@ -4,7 +4,7 @@ Summary:	Bigloo is compiler for the Scheme programming language
 Summary(pl.UTF-8):	Bigloo - kompilator języka programowania Scheme
 Name:		bigloo
 Version:	%{vermain}.%{verminor}
-Release:	1
+Release:	2
 License:	GPL/LGPL
 Group:		Development/Languages
 Source0:	ftp://ftp-sop.inria.fr/mimosa/fp/Bigloo/%{name}%{vermain}-%{verminor}.tar.gz
