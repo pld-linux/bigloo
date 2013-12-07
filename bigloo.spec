@@ -1,14 +1,16 @@
-%define		vermain		3.3a
-%define		verminor	5
+%define		vermain		4.0b
+#define		verminor	5
 Summary:	Bigloo is compiler for the Scheme programming language
 Summary(pl.UTF-8):	Bigloo - kompilator języka programowania Scheme
 Name:		bigloo
-Version:	%{vermain}.%{verminor}
-Release:	2
+#Version:	%{vermain}.%{verminor}
+Version:	%{vermain}
+Release:	1
 License:	GPL/LGPL
 Group:		Development/Languages
-Source0:	ftp://ftp-sop.inria.fr/mimosa/fp/Bigloo/%{name}%{vermain}-%{verminor}.tar.gz
-# Source0-md5:	cc07aefa51e14f3f8dbdaca9bc77386b
+#Source0:	ftp://ftp-sop.inria.fr/mimosa/fp/Bigloo/%{name}%{vermain}-%{verminor}.tar.gz
+Source0:	ftp://ftp-sop.inria.fr/mimosa/fp/Bigloo/%{name}%{vermain}.tar.gz
+# Source0-md5:	5e66d9516a877f2b892d191bbe809379
 Patch0:		%{name}-install.patch
 URL:		http://www-sop.inria.fr/mimosa/fp/Bigloo/
 BuildRequires:	gmp-devel
@@ -28,7 +30,8 @@ programowania Scheme. Bigloo pozwala na pełne łączenie programów w
 Scheme i w C. Daje szybkie i małe binarki.
 
 %prep
-%setup -q -n %{name}%{vermain}-%{verminor}
+#%setup -q -n %{name}%{vermain}-%{verminor}
+%setup -q -n %{name}%{vermain}
 %patch0 -p1
 
 %build
@@ -76,12 +79,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/bigloo/%{vermain}/bigloo_config.*
 %{_libdir}/bigloo/%{vermain}/bigloo_gc.h
 %{_libdir}/bigloo/%{vermain}/*.init
-#%{_libdir}/bigloo/%{vermain}/*.zip
 %{_libdir}/bigloo/%{vermain}/*.*heap
 %{_libdir}/bigloo/%{vermain}/lib*.a
 %{_libdir}/bigloo/%{vermain}/bmem
+%{_libdir}/bigloo/%{vermain}/text
 %attr(755,root,root) %{_libdir}/bigloo/%{vermain}/lib*.so
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_mandir}/man1/*
 %{_datadir}/info/bigloo.info*
-#%%{_datadir}/xemacs/site-lisp/bigloo/*.el*
