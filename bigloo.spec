@@ -32,7 +32,7 @@ Scheme i w C. Daje szybkie i małe binarki.
 %prep
 #%setup -q -n %{name}%{vermain}-%{verminor}
 %setup -q -n %{name}%{vermain}
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 ./configure \
