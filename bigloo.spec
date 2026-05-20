@@ -1,18 +1,18 @@
-%define		vermain		4.0b
+%define		vermain		4.6a
 #define		verminor	5
 Summary:	Bigloo is compiler for the Scheme programming language
 Summary(pl.UTF-8):	Bigloo - kompilator języka programowania Scheme
 Name:		bigloo
 #Version:	%{vermain}.%{verminor}
 Version:	%{vermain}
-Release:	2
+Release:	1
 License:	GPL/LGPL
 Group:		Development/Languages
-#Source0:	ftp://ftp-sop.inria.fr/mimosa/fp/Bigloo/%{name}%{vermain}-%{verminor}.tar.gz
-Source0:	ftp://ftp-sop.inria.fr/mimosa/fp/Bigloo/%{name}%{vermain}.tar.gz
-# Source0-md5:	5e66d9516a877f2b892d191bbe809379
+#Source0:	https://www-sop.inria.fr/indes/fp/Bigloo/download/%{name}-%{vermain}-%{verminor}.tar.gz
+Source0:	https://www-sop.inria.fr/indes/fp/Bigloo/download/%{name}-%{vermain}.tar.gz
+# Source0-md5:	6accd4ff621cd4ffcbc20348bc80fbed
 Patch0:		%{name}-install.patch
-URL:		http://www-sop.inria.fr/mimosa/fp/Bigloo/
+URL:		https://www-sop.inria.fr/indes/fp/Bigloo/
 BuildRequires:	gmp-devel
 BuildRequires:	openssl-devel
 BuildRequires:	sqlite3-devel
@@ -30,11 +30,13 @@ programowania Scheme. Bigloo pozwala na pełne łączenie programów w
 Scheme i w C. Daje szybkie i małe binarki.
 
 %prep
-#%setup -q -n %{name}%{vermain}-%{verminor}
-%setup -q -n %{name}%{vermain}
+%setup -q -n %{name}-%{vermain}
 %patch -P0 -p1
 
 %build
+# bigloo 4.6a runtime uses K&R-style function pointer declarations
+# (e.g. void (*f)()) that C23 rejects; pin gnu17 across compiler probes too.
+CC="%{__cc} -std=gnu17" \
 ./configure \
 	--prefix=%{_prefix} \
 	--bindir=%{_bindir} \
@@ -43,8 +45,9 @@ Scheme i w C. Daje szybkie i małe binarki.
 	--infodir=%{_infodir} \
 	--emacs=/bin/true \
 	--jvm=no \
-	--cflags="%{rpmcflags}" \
-	--coflags="%{rpmcflags}"
+	--cflags="-std=gnu17 %{rpmcppflags} %{rpmcflags}" \
+	--coflags="-std=gnu17 %{rpmcppflags} %{rpmcflags}" \
+	--ldflags="%{rpmldflags}"
 
 %{__make} boot
 
@@ -70,20 +73,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README ChangeLog manuals/*.html
+%doc README.md ChangeLog manuals/*.html
+%attr(755,root,root) %{_bindir}/bgl*
+%attr(755,root,root) %{_bindir}/bigloo
+%attr(755,root,root) %{_bindir}/bigloo.sh
+%attr(755,root,root) %{_bindir}/bigloo%{vermain}
 %dir %{_libdir}/bigloo
-%dir %{_libdir}/bigloo/%{vermain}
-%attr(755,root,root) %{_bindir}/*
-%{_libdir}/bigloo/%{vermain}/Makefile.config
-%{_libdir}/bigloo/%{vermain}/bigloo.h
-%{_libdir}/bigloo/%{vermain}/bigloo_config.*
-%{_libdir}/bigloo/%{vermain}/bigloo_gc.h
-%{_libdir}/bigloo/%{vermain}/*.init
-%{_libdir}/bigloo/%{vermain}/*.*heap
-%{_libdir}/bigloo/%{vermain}/lib*.a
-%{_libdir}/bigloo/%{vermain}/bmem
-%{_libdir}/bigloo/%{vermain}/text
-%attr(755,root,root) %{_libdir}/bigloo/%{vermain}/lib*.so
-%attr(755,root,root) %{_libdir}/lib*.so
+%{_libdir}/bigloo/%{vermain}
 %{_mandir}/man1/*
-%{_datadir}/info/bigloo.info*
+%{_infodir}/bigloo.info*

@@ -1,6 +1,6 @@
---- bigloo2.5b/bmacs/Makefile~	Mon Sep  2 11:41:03 2002
-+++ bigloo2.5b/bmacs/Makefile	Fri Oct 11 20:30:02 2002
-@@ -152,7 +152,7 @@
+--- bigloo-4.6a/bmacs/Makefile.orig	2026-05-20 11:40:09.043686469 +0200
++++ bigloo-4.6a/bmacs/Makefile	2026-05-20 11:40:09.045708001 +0200
+@@ -174,7 +174,7 @@
  #*---------------------------------------------------------------------*/
  #*    install ...                                                      */
  #*---------------------------------------------------------------------*/
@@ -8,4 +8,4 @@
 +install:
  
  install.emacs21: doinstall
- install.xemacs: doinstall
+ install.emacs22: doinstall
