@@ -1,4 +1,4 @@
-%define		vermain		4.6a
+%define		vermain		4.7a
 #define		verminor	5
 Summary:	Bigloo is compiler for the Scheme programming language
 Summary(pl.UTF-8):	Bigloo - kompilator języka programowania Scheme
@@ -10,7 +10,7 @@ License:	GPL/LGPL
 Group:		Development/Languages
 #Source0:	https://www-sop.inria.fr/indes/fp/Bigloo/download/%{name}-%{vermain}-%{verminor}.tar.gz
 Source0:	https://www-sop.inria.fr/indes/fp/Bigloo/download/%{name}-%{vermain}.tar.gz
-# Source0-md5:	6accd4ff621cd4ffcbc20348bc80fbed
+# Source0-md5:	8712ededcf19110781c6dc214b878803
 Patch0:		%{name}-install.patch
 URL:		https://www-sop.inria.fr/indes/fp/Bigloo/
 BuildRequires:	gmp-devel
